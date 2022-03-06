@@ -1,0 +1,7 @@
+.mcq-options-wrapper {
+    margin: 15px;
+}
+
+.mcq-options-wrapper > label {
+    margin-bottom: 8px;
+}

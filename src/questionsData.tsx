@@ -9,9 +9,14 @@ const questionsDataEnglish : any = [
     {
         id: 2,
         type: 'fill-up',
-        que: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-        options: ["dummy1", "dummy2", "dummy3", "dummy4"],
-        answer: "dummy3"
+        que: "Donec pede justo, fringilla _________ aliquet nec, vulputate eget, arcu.",
+        answer: "ans"
+    },
+    {
+        id: 3,
+        type:"boolean",
+        que: "Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem.",
+        answer: "true"
     }
 ]
 

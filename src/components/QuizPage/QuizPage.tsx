@@ -21,7 +21,7 @@ const QuizPage = ({ ...props }) => {
     <div>
         {data.map((item: any) => {
             return(
-                <Question item={item} id={item.id}/>
+                <Question item={item} key={item.id}/>
             )
         })}
     </div>

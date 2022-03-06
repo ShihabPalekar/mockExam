@@ -3,22 +3,22 @@ import MatchUp from "./MatchUp";
 import MCQ from "./MCQ";
 import MultiSelect from "./MultiSelect";
 import TrueFalse from "./TrueFalse";
+import "./question.css"
 
 const Question = ({...props}) => {
-  const type = props.item.type
+  const {item} = props
 
-  console.log(type)
-  switch (type) {
+  switch (item.type) {
     case "mcq":
-      return <MCQ />;
+      return <MCQ queObj={item}/>;
     case "boolean":
-      return <TrueFalse />;
+      return <TrueFalse queObj={item}/>;
     case "fill-up":
-      return <FillUp />;
+      return <FillUp queObj={item}/>;
     case "multi-select":
-      return <MultiSelect />;
+      return <MultiSelect queObj={item}/>;
     case "match-the-pair":
-      return <MatchUp />;
+      return <MatchUp queObj={item}/>;
     default: {
       return <div></div>;
     }

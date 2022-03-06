@@ -1,4 +1,6 @@
-const MatchUp = () => {
+const MatchUp = ({...props}) => {
+    const {queObj} = props
+
     return(
         <div>
             Match Up
