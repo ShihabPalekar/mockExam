@@ -17,7 +17,7 @@ const Question = ({...props}) => {
       return <FillUp queObj={item}/>;
     case "multi-select":
       return <MultiSelect queObj={item}/>;
-    case "match-the-pair":
+    case "match-up":
       return <MatchUp queObj={item}/>;
     default: {
       return <div></div>;

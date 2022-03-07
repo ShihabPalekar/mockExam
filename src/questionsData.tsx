@@ -17,6 +17,23 @@ const questionsDataEnglish : any = [
         type:"boolean",
         que: "Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem.",
         answer: "true"
+    },
+    {
+        id: 3,
+        type:"boolean",
+        que: "Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem.",
+        answer: "true"
+    },
+    {
+        id: 4,
+        type: "match-up",
+        que: "Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem.",
+        options: [
+            {id: 1, q: "Apple", a: "Fruit"},
+            {id: 2, q: "Chair", a: "Object"},
+            {id: 3, q: "Red", a: "Colour"},
+            {id: 4, q: "India", a: "Country"},
+        ]
     }
 ]
 
