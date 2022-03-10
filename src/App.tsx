@@ -1,23 +1,36 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { Routes, Route } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import DetailsForm from "./components/DetailsForm/DetailsForm";
 import QuizPage from "./components/QuizPage/QuizPage";
 import Result from "./components/Result";
 
-const App = () => {
-  const [personalDetails, setPersonalDetails] = useState({language: 'english'})
+const App: React.FC = () => {
+  const [personalDetails, setPersonalDetails] = useState({
+    language: "english",
+  });
+  let navigate = useNavigate();
 
   return (
     <div className="app">
-        <Router>
-            <Routes >
-                <Route path="/" element={<DetailsForm setPersonalDetails={setPersonalDetails}/>} />
-                <Route path="/quiz" element={<QuizPage language={personalDetails.language}/>} />
-                <Route path="/result" element={<Result />} />
-            </Routes>
-        </Router>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <DetailsForm
+              navigate={navigate}
+              setPersonalDetails={setPersonalDetails}
+            />
+          }
+        />
+        <Route
+          path="/quiz"
+          element={<QuizPage language={personalDetails.language} />}
+        />
+        <Route path="/result" element={<Result />} />
+      </Routes>
     </div>
   );
-}
+};
 
 export default App;

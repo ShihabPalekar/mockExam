@@ -1,6 +1,16 @@
-import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from "@mui/material";
+import {
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
 
-const MCQ = ({ ...props }) => {
+type Props = {
+  queObj: any;
+};
+
+const MCQ: React.FC<Props> = ({ ...props }) => {
   const { queObj } = props;
 
   return (
@@ -17,9 +27,13 @@ const MCQ = ({ ...props }) => {
             // onChange={handleInputChange}
           >
             {queObj.options.map((option: string) => {
-                return(
-                    <FormControlLabel value={option} control={<Radio />} label={option} />
-                )
+              return (
+                <FormControlLabel
+                  value={option}
+                  control={<Radio />}
+                  label={option}
+                />
+              );
             })}
           </RadioGroup>
         </FormControl>

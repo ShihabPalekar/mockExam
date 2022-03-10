@@ -1,13 +1,21 @@
 import { useEffect, useState } from "react";
 import Question from "../Question/Question";
 import "./quizPage.css";
-import {questionsDataEnglish, questionsDataHindi, questionsDataSpanish} from "../../questionsData"
+import {
+  questionsDataEnglish,
+  questionsDataHindi,
+  questionsDataSpanish,
+} from "../../questionsData";
 
-const QuizPage = ({ ...props }) => {
-  const [data, setData] : any = useState([]);
+type Props = {
+  language: string;
+};
+
+const QuizPage: React.FC<Props> = ({ ...props }) => {
+  const [data, setData]: any = useState([]);
 
   useEffect(() => {
-    const {language} = props
+    const { language } = props;
     if (language === "english") {
       setData(questionsDataEnglish);
     } else if (language === "hindi") {
@@ -15,15 +23,13 @@ const QuizPage = ({ ...props }) => {
     } else if (language === "spanish") {
       setData(questionsDataSpanish);
     }
-  });
+  }, []);
 
   return (
     <div>
-        {data.map((item: any) => {
-            return(
-                <Question item={item} key={item.id}/>
-            )
-        })}
+      {data.map((item: any) => {
+        return <Question item={item} key={item.id} />;
+      })}
     </div>
   );
 };

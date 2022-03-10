@@ -3,22 +3,26 @@ import MatchUp from "./MatchUp";
 import MCQ from "./MCQ";
 import MultiSelect from "./MultiSelect";
 import TrueFalse from "./TrueFalse";
-import "./question.css"
+import "./question.css";
 
-const Question = ({...props}) => {
-  const {item} = props
+type Props = {
+  item: any;
+};
+
+const Question: React.FC<Props> = ({ ...props }) => {
+  const { item } = props;
 
   switch (item.type) {
     case "mcq":
-      return <MCQ queObj={item}/>;
+      return <MCQ queObj={item} />;
     case "boolean":
-      return <TrueFalse queObj={item}/>;
+      return <TrueFalse queObj={item} />;
     case "fill-up":
-      return <FillUp queObj={item}/>;
+      return <FillUp queObj={item} />;
     case "multi-select":
-      return <MultiSelect queObj={item}/>;
+      return <MultiSelect queObj={item} />;
     case "match-up":
-      return <MatchUp queObj={item}/>;
+      return <MatchUp queObj={item} />;
     default: {
       return <div></div>;
     }

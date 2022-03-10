@@ -1,6 +1,10 @@
 import { TextField } from "@mui/material";
 
-const MatchUp = ({ ...props }) => {
+type Props = {
+  queObj: any;
+};
+
+const MatchUp: React.FC<Props> = ({ ...props }) => {
   const { queObj } = props;
   const ques = queObj.options.map((i: any) => i.q);
   const shuffledAns = queObj.options
@@ -46,7 +50,7 @@ const MatchUp = ({ ...props }) => {
               <span style={{ marginRight: "10px" }}>
                 {ques.indexOf(i) + 1}.
               </span>
-              <TextField variant="standard" style={{width: "60px"}} />
+              <TextField variant="standard" style={{ width: "60px" }} />
             </p>
           );
         })}

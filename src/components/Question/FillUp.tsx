@@ -1,6 +1,10 @@
 import { TextField } from "@mui/material";
 
-const FillUp = ({ ...props }) => {
+type Props = {
+  queObj: any;
+};
+
+const FillUp: React.FC<Props> = ({ ...props }) => {
   const { queObj } = props;
 
   return (
