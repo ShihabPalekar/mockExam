@@ -11,7 +11,6 @@ type Props = {
 
 const Question: React.FC<Props> = ({ ...props }) => {
   const { item } = props;
-
   switch (item.type) {
     case "mcq":
       return <MCQ queObj={item} />;

@@ -6,6 +6,8 @@ import {
   questionsDataHindi,
   questionsDataSpanish,
 } from "../../questionsData";
+import Pagination from "../Pagination/Pagination";
+import { Button } from "@mui/material";
 
 type Props = {
   language: string;
@@ -13,6 +15,9 @@ type Props = {
 
 const QuizPage: React.FC<Props> = ({ ...props }) => {
   const [data, setData]: any = useState([]);
+  const [currPage, setCurrPage] = useState(0);
+
+  console.log(data.length);
 
   useEffect(() => {
     const { language } = props;
@@ -25,11 +30,22 @@ const QuizPage: React.FC<Props> = ({ ...props }) => {
     }
   }, []);
 
+  console.log(data[currPage], "----quizpage");
+
   return (
     <div>
-      {data.map((item: any) => {
-        return <Question item={item} key={item.id} />;
-      })}
+      {data[currPage] !== undefined && (
+        <div>
+          <Pagination data={data} />
+          <Question item={data[currPage]} />
+          <div className="to-fro-btns">
+            {currPage > 0 && <Button variant="contained">Prev question</Button>}
+            <Button variant="contained">
+              {currPage < data.length - 1 ? "Next question" : "Submit"}
+            </Button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
