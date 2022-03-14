@@ -16,8 +16,7 @@ type Props = {
 const QuizPage: React.FC<Props> = ({ ...props }) => {
   const [data, setData]: any = useState([]);
   const [currPage, setCurrPage] = useState(0);
-
-  console.log(data.length);
+  const [selectedAns, setSelectedAns] = useState([]);
 
   useEffect(() => {
     const { language } = props;
@@ -30,17 +29,37 @@ const QuizPage: React.FC<Props> = ({ ...props }) => {
     }
   }, []);
 
-  console.log(data[currPage], "----quizpage");
+  const handleSubmit = () => {
+    console.log("submit");
+  };
+
+  const prevQue = () => {
+    setCurrPage((prevState) => prevState - 1);
+  };
+
+  const nextQue = () => {
+    currPage < data.length - 1
+      ? setCurrPage((prevState) => prevState + 1)
+      : handleSubmit();
+  };
 
   return (
     <div>
       {data[currPage] !== undefined && (
         <div>
-          <Pagination data={data} />
+          <Pagination
+            data={data}
+            currPage={currPage}
+            setCurrPage={setCurrPage}
+          />
           <Question item={data[currPage]} />
           <div className="to-fro-btns">
-            {currPage > 0 && <Button variant="contained">Prev question</Button>}
-            <Button variant="contained">
+            {currPage > 0 && (
+              <Button variant="contained" onClick={prevQue}>
+                Prev question
+              </Button>
+            )}
+            <Button variant="contained" onClick={nextQue}>
               {currPage < data.length - 1 ? "Next question" : "Submit"}
             </Button>
           </div>

@@ -1,17 +1,29 @@
 import {
+  Button,
   FormControl,
   FormControlLabel,
   FormLabel,
   Radio,
   RadioGroup,
 } from "@mui/material";
+import { useState } from "react";
 
 type Props = {
   queObj: any;
+  currPage: number;
+  data: any;
+  prevQue: any;
+  nextQue: any;
+  selectedAns: any;
 };
 
 const MCQ: React.FC<Props> = ({ ...props }) => {
   const { queObj } = props;
+  const [selected, setSelected] = useState("");
+
+  const handleInputChange = (e: any) => {
+    setSelected(e.target.value);
+  };
 
   return (
     <div>
@@ -24,7 +36,7 @@ const MCQ: React.FC<Props> = ({ ...props }) => {
             name="mcq"
             className="mcq-options"
             // value={values.gender}
-            // onChange={handleInputChange}
+            onChange={handleInputChange}
           >
             {queObj.options.map((option: string) => {
               return (
@@ -37,6 +49,18 @@ const MCQ: React.FC<Props> = ({ ...props }) => {
             })}
           </RadioGroup>
         </FormControl>
+        <div className="to-fro-btns">
+          {props.currPage > 0 && (
+            <Button variant="contained" onClick={props.prevQue}>
+              Prev question
+            </Button>
+          )}
+          <Button variant="contained" onClick={props.nextQue}>
+            {props.currPage < props.data.length - 1
+              ? "Next question"
+              : "Submit"}
+          </Button>
+        </div>
       </div>
     </div>
   );
