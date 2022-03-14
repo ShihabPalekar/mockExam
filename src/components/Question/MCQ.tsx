@@ -14,16 +14,22 @@ type Props = {
   data: any;
   prevQue: any;
   nextQue: any;
-  selectedAns: any;
+  handleQueAttempt: any;
 };
 
 const MCQ: React.FC<Props> = ({ ...props }) => {
   const { queObj } = props;
-  const [selected, setSelected] = useState("");
+  const [ansInput, setAnsInput] = useState("");
 
   const handleInputChange = (e: any) => {
-    setSelected(e.target.value);
+    setAnsInput(e.target.value);
   };
+
+  const handleSubmit = () => {
+    props.handleQueAttempt(queObj.id, ansInput);
+  };
+
+  const handlePrev = () => {};
 
   return (
     <div>
@@ -50,15 +56,22 @@ const MCQ: React.FC<Props> = ({ ...props }) => {
           </RadioGroup>
         </FormControl>
         <div className="to-fro-btns">
-          {props.currPage > 0 && (
-            <Button variant="contained" onClick={props.prevQue}>
-              Prev question
-            </Button>
-          )}
-          <Button variant="contained" onClick={props.nextQue}>
-            {props.currPage < props.data.length - 1
-              ? "Next question"
-              : "Submit"}
+          <Button
+            disabled={props.currPage <= 0}
+            variant="contained"
+            onClick={props.prevQue}
+          >
+            Prev
+          </Button>
+          <Button variant="contained" onClick={handleSubmit}>
+            {props.currPage < props.data.length - 1 ? "Submit" : "Finish test"}
+          </Button>
+          <Button
+            disabled={props.currPage >= props.data.length - 1}
+            variant="contained"
+            onClick={props.nextQue}
+          >
+            Next
           </Button>
         </div>
       </div>

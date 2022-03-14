@@ -16,7 +16,11 @@ const Pagination: React.FC<Props> = ({ ...props }) => {
     <div className="pagination-wrapper">
       {props.data.map((item: any) => {
         return (
-          <Button variant="outlined" onClick={pageChange}>
+          <Button
+            key={props.data.indexOf(item) + 1}
+            variant="outlined"
+            onClick={pageChange}
+          >
             {props.data.indexOf(item) + 1}
           </Button>
         );

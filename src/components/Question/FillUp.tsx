@@ -6,7 +6,7 @@ type Props = {
   data: any;
   prevQue: any;
   nextQue: any;
-  selectedAns: any;
+  handleQueAttempt: any;
 };
 
 const FillUp: React.FC<Props> = ({ ...props }) => {
@@ -24,13 +24,22 @@ const FillUp: React.FC<Props> = ({ ...props }) => {
         // value={values.name}
       />
       <div className="to-fro-btns">
-        {props.currPage > 0 && (
-          <Button variant="contained" onClick={props.prevQue}>
-            Prev question
-          </Button>
-        )}
-        <Button variant="contained" onClick={props.nextQue}>
-          {props.currPage < props.data.length - 1 ? "Next question" : "Submit"}
+        <Button
+          disabled={props.currPage <= 0}
+          variant="contained"
+          onClick={props.prevQue}
+        >
+          Prev
+        </Button>
+        <Button variant="contained">
+          {props.currPage < props.data.length - 1 ? "Submit" : "Finish test"}
+        </Button>
+        <Button
+          disabled={props.currPage >= props.data.length - 1}
+          variant="contained"
+          onClick={props.nextQue}
+        >
+          Next
         </Button>
       </div>
     </div>

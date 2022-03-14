@@ -7,7 +7,6 @@ import {
   questionsDataSpanish,
 } from "../../questionsData";
 import Pagination from "../Pagination/Pagination";
-import { Button } from "@mui/material";
 
 type Props = {
   language: string;
@@ -16,8 +15,6 @@ type Props = {
 const QuizPage: React.FC<Props> = ({ ...props }) => {
   const [data, setData]: any = useState([]);
   const [currPage, setCurrPage] = useState(0);
-  const [selectedAns, setSelectedAns] = useState([]);
-  const [marks, setMarks] = useState(0)
 
   useEffect(() => {
     const { language } = props;
@@ -30,18 +27,19 @@ const QuizPage: React.FC<Props> = ({ ...props }) => {
     }
   }, []);
 
-  const handleSubmit = () => {
-    console.log("submit");
-  };
-
   const prevQue = () => {
     setCurrPage((prevState) => prevState - 1);
   };
 
   const nextQue = () => {
-    currPage < data.length - 1
-      ? setCurrPage((prevState) => prevState + 1)
-      : handleSubmit();
+    setCurrPage((prevState) => prevState + 1);
+  };
+
+  const handleQueAttempt = (qid: number, ans: any) => {
+    setData((prevState: any) =>
+      prevState.map((i: any) => (i.id === qid ? { ...i, ansInput: ans } : i))
+    );
+    nextQue();
   };
 
   return (
@@ -53,7 +51,14 @@ const QuizPage: React.FC<Props> = ({ ...props }) => {
             currPage={currPage}
             setCurrPage={setCurrPage}
           />
-          <Question item={data[currPage]} currPage={currPage} data={data} prevQue={prevQue} nextQue={nextQue} selectedAns={selectedAns}/>
+          <Question
+            item={data[currPage]}
+            currPage={currPage}
+            data={data}
+            prevQue={prevQue}
+            nextQue={nextQue}
+            handleQueAttempt={handleQueAttempt}
+          />
         </div>
       )}
     </div>
