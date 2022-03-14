@@ -1,4 +1,5 @@
 import {
+  Button,
   FormControl,
   FormControlLabel,
   FormLabel,
@@ -9,6 +10,11 @@ import React from "react";
 
 type Props = {
   queObj: any;
+  currPage: number;
+  data: any;
+  prevQue: any;
+  nextQue: any;
+  selectedAns: any;
 };
 
 const TrueFalse: React.FC<Props> = ({ ...props }) => {
@@ -30,6 +36,16 @@ const TrueFalse: React.FC<Props> = ({ ...props }) => {
             <FormControlLabel value="false" control={<Radio />} label="False" />
           </RadioGroup>
         </FormControl>
+      </div>
+      <div className="to-fro-btns">
+        {props.currPage > 0 && (
+          <Button variant="contained" onClick={props.prevQue}>
+            Prev question
+          </Button>
+        )}
+        <Button variant="contained" onClick={props.nextQue}>
+          {props.currPage < props.data.length - 1 ? "Next question" : "Submit"}
+        </Button>
       </div>
     </div>
   );

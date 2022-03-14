@@ -1,7 +1,12 @@
-import { TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 
 type Props = {
   queObj: any;
+  currPage: number;
+  data: any;
+  prevQue: any;
+  nextQue: any;
+  selectedAns: any;
 };
 
 const MatchUp: React.FC<Props> = ({ ...props }) => {
@@ -54,6 +59,16 @@ const MatchUp: React.FC<Props> = ({ ...props }) => {
             </p>
           );
         })}
+      </div>
+      <div className="to-fro-btns">
+        {props.currPage > 0 && (
+          <Button variant="contained" onClick={props.prevQue}>
+            Prev question
+          </Button>
+        )}
+        <Button variant="contained" onClick={props.nextQue}>
+          {props.currPage < props.data.length - 1 ? "Next question" : "Submit"}
+        </Button>
       </div>
     </div>
   );

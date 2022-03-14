@@ -17,6 +17,7 @@ const QuizPage: React.FC<Props> = ({ ...props }) => {
   const [data, setData]: any = useState([]);
   const [currPage, setCurrPage] = useState(0);
   const [selectedAns, setSelectedAns] = useState([]);
+  const [marks, setMarks] = useState(0)
 
   useEffect(() => {
     const { language } = props;
@@ -52,17 +53,7 @@ const QuizPage: React.FC<Props> = ({ ...props }) => {
             currPage={currPage}
             setCurrPage={setCurrPage}
           />
-          <Question item={data[currPage]} />
-          <div className="to-fro-btns">
-            {currPage > 0 && (
-              <Button variant="contained" onClick={prevQue}>
-                Prev question
-              </Button>
-            )}
-            <Button variant="contained" onClick={nextQue}>
-              {currPage < data.length - 1 ? "Next question" : "Submit"}
-            </Button>
-          </div>
+          <Question item={data[currPage]} currPage={currPage} data={data} prevQue={prevQue} nextQue={nextQue} selectedAns={selectedAns}/>
         </div>
       )}
     </div>

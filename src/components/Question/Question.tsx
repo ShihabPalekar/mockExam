@@ -7,21 +7,25 @@ import "./question.css";
 
 type Props = {
   item: any;
+  currPage: number;
+  data: any;
+  prevQue: any;
+  nextQue: any;
+  selectedAns: any;
 };
 
 const Question: React.FC<Props> = ({ ...props }) => {
-  const { item } = props;
-  switch (item.type) {
+  switch (props.item.type) {
     case "mcq":
-      return <MCQ queObj={item} />;
+      return <MCQ queObj={props.item} currPage={props.currPage} data={props.data} prevQue={props.prevQue} nextQue={props.nextQue} selectedAns={props.selectedAns} />;
     case "boolean":
-      return <TrueFalse queObj={item} />;
+      return <TrueFalse queObj={props.item} currPage={props.currPage} data={props.data} prevQue={props.prevQue} nextQue={props.nextQue} selectedAns={props.selectedAns}/>;
     case "fill-up":
-      return <FillUp queObj={item} />;
+      return <FillUp queObj={props.item} currPage={props.currPage} data={props.data} prevQue={props.prevQue} nextQue={props.nextQue} selectedAns={props.selectedAns}/>;
     case "multi-select":
-      return <MultiSelect queObj={item} />;
+      return <MultiSelect queObj={props.item} currPage={props.currPage} data={props.data} prevQue={props.prevQue} nextQue={props.nextQue} selectedAns={props.selectedAns}/>;
     case "match-up":
-      return <MatchUp queObj={item} />;
+      return <MatchUp queObj={props.item} currPage={props.currPage} data={props.data} prevQue={props.prevQue} nextQue={props.nextQue} selectedAns={props.selectedAns}/>;
     default: {
       return <div></div>;
     }

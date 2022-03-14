@@ -1,8 +1,13 @@
-import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
+import { Button, Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { useState } from "react";
 
 type Props = {
   queObj: any;
+  currPage: number;
+  data: any;
+  prevQue: any;
+  nextQue: any;
+  selectedAns: any;
 };
 
 const MultiSelect: React.FC<Props> = ({ ...props }) => {
@@ -22,6 +27,16 @@ const MultiSelect: React.FC<Props> = ({ ...props }) => {
             );
           })}
         </div>
+      </div>
+      <div className="to-fro-btns">
+        {props.currPage > 0 && (
+          <Button variant="contained" onClick={props.prevQue}>
+            Prev question
+          </Button>
+        )}
+        <Button variant="contained" onClick={props.nextQue}>
+          {props.currPage < props.data.length - 1 ? "Next question" : "Submit"}
+        </Button>
       </div>
     </div>
   );
