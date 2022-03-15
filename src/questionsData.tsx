@@ -22,18 +22,20 @@ const questionsDataEnglish: any = [
     id: 4,
     type: "match-up",
     que: "Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem.",
-    options: [
-      { id: 1, q: "Apple", a: "Fruit" },
-      { id: 2, q: "Chair", a: "Object" },
-      { id: 3, q: "Red", a: "Colour" },
-      { id: 4, q: "India", a: "Country" },
+    columnA: [
+      { id: "Q1", opt: "Apple", answer: "Fruit" },
+      { id: "Q2", opt: "Cat", answer: "Animal" },
+      { id: "Q3", opt: "Red", answer: "Color" },
+      { id: "Q4", opt: "India", answer: "Country" },
     ],
+    columnB: ["Color", "Animal", "Country", "Fruit"],
   },
   {
     id: 5,
     type: "multi-select",
     que: "Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem.",
     options: ["dummy1", "dummy2", "dummy3", "dummy4"],
+    answer: ["dummy2", "dummy4"]
   },
 ];
 

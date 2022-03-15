@@ -6,7 +6,7 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 
 type Props = {
   queObj: any;
@@ -20,6 +20,17 @@ type Props = {
 const TrueFalse: React.FC<Props> = ({ ...props }) => {
   const { queObj } = props;
 
+  const [ansInput, setAnsInput] = useState("");
+
+  const handleInputChange = (e: any) => {
+    setAnsInput(e.target.value);
+  };
+
+  const handleSubmit = () => {
+    props.handleQueAttempt(queObj.id, ansInput);
+  };
+
+
   return (
     <div>
       <h2>{queObj.que}</h2>
@@ -29,8 +40,7 @@ const TrueFalse: React.FC<Props> = ({ ...props }) => {
           <RadioGroup
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="true-false"
-            //   value={values.gender}
-            //   onChange={handleInputChange}
+              onChange={handleInputChange}
           >
             <FormControlLabel value="true" control={<Radio />} label="True" />
             <FormControlLabel value="false" control={<Radio />} label="False" />
@@ -45,7 +55,7 @@ const TrueFalse: React.FC<Props> = ({ ...props }) => {
         >
           Prev
         </Button>
-        <Button variant="contained">
+        <Button variant="contained" onClick={handleSubmit}>
           {props.currPage < props.data.length - 1 ? "Submit" : "Finish test"}
         </Button>
         <Button

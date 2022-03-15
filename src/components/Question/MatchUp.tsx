@@ -1,4 +1,5 @@
 import { Button, TextField } from "@mui/material";
+import { useState } from "react";
 
 type Props = {
   queObj: any;
@@ -11,10 +12,19 @@ type Props = {
 
 const MatchUp: React.FC<Props> = ({ ...props }) => {
   const { queObj } = props;
-  const ques = queObj.options.map((i: any) => i.q);
-  const shuffledAns = queObj.options
-    .map((i: any) => i.a)
-    .sort((a: any, b: any) => 0.5 - Math.random());
+  const [optionsArr, setOptionsArr] = useState(queObj.columnA);
+
+  const handleInputChange = (id: string) => (e: any) => {
+    setOptionsArr((prevState: any) =>
+      prevState.map((i: any) =>
+        i.id === id ? { ...i, selectedOpt: queObj.columnB[e.target.value.toLowerCase().charCodeAt(0) - 97] } : i
+      )
+    );
+  };
+
+  const handleSubmit = () => {
+    props.handleQueAttempt(queObj.id, optionsArr);
+  };
 
   return (
     <div>
@@ -22,24 +32,24 @@ const MatchUp: React.FC<Props> = ({ ...props }) => {
       <div className="match-up-options-wrapper">
         <div>
           <p className="column-heading">Column A</p>
-          {ques.map((i: string) => {
+          {queObj.columnA.map((i: any) => {
             return (
-              <p>
+              <p key={i.id}>
                 <span style={{ marginRight: "10px" }}>
-                  {ques.indexOf(i) + 1}.
+                  {queObj.columnA.indexOf(i) + 1}.
                 </span>
-                <span>{i}</span>
+                <span>{i.opt}</span>
               </p>
             );
           })}
         </div>
         <div className="match-up-answers-column">
           <p className="column-heading">Column B</p>
-          {shuffledAns.map((i: string) => {
+          {queObj.columnB.map((i: string, index: number) => {
             return (
-              <p>
+              <p key={index}>
                 <span style={{ marginRight: "10px" }}>
-                  {String.fromCharCode(shuffledAns.indexOf(i) + 65)}.
+                  {String.fromCharCode(index + 65)}.
                 </span>
                 <span>{i}</span>
               </p>
@@ -49,13 +59,17 @@ const MatchUp: React.FC<Props> = ({ ...props }) => {
       </div>
       <div className="match-up-answers">
         <p className="column-heading">Your answers:</p>
-        {ques.map((i: string) => {
+        {queObj.columnA.map((i: any) => {
           return (
-            <p>
+            <p key={i.id}>
               <span style={{ marginRight: "10px" }}>
-                {ques.indexOf(i) + 1}.
+                {queObj.columnA.indexOf(i) + 1}.
               </span>
-              <TextField variant="standard" style={{ width: "60px" }} />
+              <TextField
+                variant="standard"
+                style={{ width: "60px" }}
+                onChange={handleInputChange(i.id)}
+              />
             </p>
           );
         })}
@@ -68,7 +82,7 @@ const MatchUp: React.FC<Props> = ({ ...props }) => {
         >
           Prev
         </Button>
-        <Button variant="contained">
+        <Button variant="contained" onClick={handleSubmit}>
           {props.currPage < props.data.length - 1 ? "Submit" : "Finish test"}
         </Button>
         <Button

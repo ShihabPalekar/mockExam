@@ -9,6 +9,7 @@ const App: React.FC = () => {
   const [personalDetails, setPersonalDetails] = useState({
     language: "english",
   });
+  const [result, setResult]: any = useState([]);
   let navigate = useNavigate();
 
   return (
@@ -25,9 +26,12 @@ const App: React.FC = () => {
         />
         <Route
           path="/quiz"
-          element={<QuizPage language={personalDetails.language} />}
+          element={<QuizPage language={personalDetails.language} setResult={setResult}/>}
         />
-        <Route path="/result" element={<Result />} />
+        <Route
+          path="/result"
+          element={<Result navigate={navigate} result={result} />}
+        />
       </Routes>
     </div>
   );

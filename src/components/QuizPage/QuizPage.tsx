@@ -10,6 +10,7 @@ import Pagination from "../Pagination/Pagination";
 
 type Props = {
   language: string;
+  setResult: any;
 };
 
 const QuizPage: React.FC<Props> = ({ ...props }) => {
@@ -39,7 +40,7 @@ const QuizPage: React.FC<Props> = ({ ...props }) => {
     setData((prevState: any) =>
       prevState.map((i: any) => (i.id === qid ? { ...i, ansInput: ans } : i))
     );
-    nextQue();
+    // nextQue();
   };
 
   return (

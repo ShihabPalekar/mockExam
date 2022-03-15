@@ -29,8 +29,6 @@ const MCQ: React.FC<Props> = ({ ...props }) => {
     props.handleQueAttempt(queObj.id, ansInput);
   };
 
-  const handlePrev = () => {};
-
   return (
     <div>
       <h2>{queObj.que}</h2>
@@ -41,12 +39,12 @@ const MCQ: React.FC<Props> = ({ ...props }) => {
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="mcq"
             className="mcq-options"
-            // value={values.gender}
             onChange={handleInputChange}
           >
             {queObj.options.map((option: string) => {
               return (
                 <FormControlLabel
+                  key={option}
                   value={option}
                   control={<Radio />}
                   label={option}

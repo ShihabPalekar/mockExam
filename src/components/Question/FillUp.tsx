@@ -1,4 +1,5 @@
 import { Button, TextField } from "@mui/material";
+import { useState } from "react";
 
 type Props = {
   queObj: any;
@@ -12,6 +13,17 @@ type Props = {
 const FillUp: React.FC<Props> = ({ ...props }) => {
   const { queObj } = props;
 
+  const [ansInput, setAnsInput] = useState("");
+
+  const handleInputChange = (e: any) => {
+    setAnsInput(e.target.value);
+  };
+
+  const handleSubmit = () => {
+    props.handleQueAttempt(queObj.id, ansInput);
+  };
+
+
   return (
     <div>
       <h2>{queObj.que}</h2>
@@ -20,8 +32,7 @@ const FillUp: React.FC<Props> = ({ ...props }) => {
         label="Your answer"
         name="name"
         variant="standard"
-        // onChange={handleInputChange}
-        // value={values.name}
+        onChange={handleInputChange}
       />
       <div className="to-fro-btns">
         <Button
@@ -31,7 +42,7 @@ const FillUp: React.FC<Props> = ({ ...props }) => {
         >
           Prev
         </Button>
-        <Button variant="contained">
+        <Button variant="contained" onClick={handleSubmit}>
           {props.currPage < props.data.length - 1 ? "Submit" : "Finish test"}
         </Button>
         <Button
