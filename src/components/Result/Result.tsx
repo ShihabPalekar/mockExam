@@ -43,13 +43,13 @@ const Result: React.FC<Props> = ({ ...props }) => {
   console.log(marks);
 
   if (isLoading) {
-    return <p>Calculating result...</p>;
+    return <p className="loader">Calculating result...</p>;
   }
 
   return (
     <div className="results-wrapper">
       <div className="correct-ans">
-        <h2>Answers</h2>
+        <h2 role="ans-header">Answers</h2>
         {data.map((i: any, index: number) => {
           if (i.type === "match-up") {
             return (
@@ -108,7 +108,7 @@ const Result: React.FC<Props> = ({ ...props }) => {
       </div>
       <div className="pie">
         <h2>Result</h2>
-        <h3 style={{marginTop: "25px"}}>Your total score is {marks} out of {totalMarks}.</h3>
+        <h3 style={{marginTop: "25px"}} role="marks-scored">Your total score is {marks} out of {totalMarks}.</h3>
         <PieChart
           totalValue={totalMarks}
           data={[

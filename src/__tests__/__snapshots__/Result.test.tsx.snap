@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot of result page 1`] = `
+<p
+  className="loader"
+>
+  Calculating result...
+</p>
+`;

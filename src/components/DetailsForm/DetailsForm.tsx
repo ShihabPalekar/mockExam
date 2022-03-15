@@ -104,6 +104,7 @@ const DetailsForm: React.FC<Props> = ({ ...props }) => {
       <div className="submit-btn">
         <Button
           disabled={buttonDisabled()}
+          role="start-quiz"
           variant="contained"
           onClick={submitForm}
         >
