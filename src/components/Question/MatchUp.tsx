@@ -8,6 +8,7 @@ type Props = {
   prevQue: any;
   nextQue: any;
   handleQueAttempt: any;
+  handleFinishTest: any;
 };
 
 const MatchUp: React.FC<Props> = ({ ...props }) => {
@@ -17,13 +18,23 @@ const MatchUp: React.FC<Props> = ({ ...props }) => {
   const handleInputChange = (id: string) => (e: any) => {
     setOptionsArr((prevState: any) =>
       prevState.map((i: any) =>
-        i.id === id ? { ...i, selectedOpt: queObj.columnB[e.target.value.toLowerCase().charCodeAt(0) - 97] } : i
+        i.id === id
+          ? {
+              ...i,
+              selectedOpt:
+                queObj.columnB[e.target.value.toLowerCase().charCodeAt(0) - 97],
+            }
+          : i
       )
     );
   };
 
   const handleSubmit = () => {
     props.handleQueAttempt(queObj.id, optionsArr);
+  };
+
+  const finishTest = () => {
+    props.handleFinishTest(queObj.id, optionsArr);
   };
 
   return (
@@ -82,7 +93,12 @@ const MatchUp: React.FC<Props> = ({ ...props }) => {
         >
           Prev
         </Button>
-        <Button variant="contained" onClick={handleSubmit}>
+        <Button
+          variant="contained"
+          onClick={
+            props.currPage < props.data.length - 1 ? handleSubmit : finishTest
+          }
+        >
           {props.currPage < props.data.length - 1 ? "Submit" : "Finish test"}
         </Button>
         <Button

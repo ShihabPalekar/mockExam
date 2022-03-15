@@ -15,6 +15,7 @@ type Props = {
   prevQue: any;
   nextQue: any;
   handleQueAttempt: any;
+  handleFinishTest: any;
 };
 
 const MCQ: React.FC<Props> = ({ ...props }) => {
@@ -27,6 +28,10 @@ const MCQ: React.FC<Props> = ({ ...props }) => {
 
   const handleSubmit = () => {
     props.handleQueAttempt(queObj.id, ansInput);
+  };
+
+  const finishTest = () => {
+    props.handleFinishTest(queObj.id, ansInput);
   };
 
   return (
@@ -61,7 +66,12 @@ const MCQ: React.FC<Props> = ({ ...props }) => {
           >
             Prev
           </Button>
-          <Button variant="contained" onClick={handleSubmit}>
+          <Button
+            variant="contained"
+            onClick={
+              props.currPage < props.data.length - 1 ? handleSubmit : finishTest
+            }
+          >
             {props.currPage < props.data.length - 1 ? "Submit" : "Finish test"}
           </Button>
           <Button

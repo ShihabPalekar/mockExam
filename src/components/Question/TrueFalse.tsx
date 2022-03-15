@@ -15,6 +15,7 @@ type Props = {
   prevQue: any;
   nextQue: any;
   handleQueAttempt: any;
+  handleFinishTest: any;
 };
 
 const TrueFalse: React.FC<Props> = ({ ...props }) => {
@@ -30,6 +31,9 @@ const TrueFalse: React.FC<Props> = ({ ...props }) => {
     props.handleQueAttempt(queObj.id, ansInput);
   };
 
+  const finishTest = () => {
+    props.handleFinishTest(queObj.id, ansInput);
+  };
 
   return (
     <div>
@@ -40,7 +44,7 @@ const TrueFalse: React.FC<Props> = ({ ...props }) => {
           <RadioGroup
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="true-false"
-              onChange={handleInputChange}
+            onChange={handleInputChange}
           >
             <FormControlLabel value="true" control={<Radio />} label="True" />
             <FormControlLabel value="false" control={<Radio />} label="False" />
@@ -55,7 +59,12 @@ const TrueFalse: React.FC<Props> = ({ ...props }) => {
         >
           Prev
         </Button>
-        <Button variant="contained" onClick={handleSubmit}>
+        <Button
+          variant="contained"
+          onClick={
+            props.currPage < props.data.length - 1 ? handleSubmit : finishTest
+          }
+        >
           {props.currPage < props.data.length - 1 ? "Submit" : "Finish test"}
         </Button>
         <Button

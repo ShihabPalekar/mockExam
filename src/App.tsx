@@ -3,13 +3,11 @@ import { Routes, Route } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import DetailsForm from "./components/DetailsForm/DetailsForm";
 import QuizPage from "./components/QuizPage/QuizPage";
-import Result from "./components/Result";
+import Result from "./components/Result/Result";
 
 const App: React.FC = () => {
-  const [personalDetails, setPersonalDetails] = useState({
-    language: "english",
-  });
-  const [result, setResult]: any = useState([]);
+  const [personalDetails, setPersonalDetails]: any = useState([]);
+  const [data, setData]: any = useState([]);
   let navigate = useNavigate();
 
   return (
@@ -26,11 +24,18 @@ const App: React.FC = () => {
         />
         <Route
           path="/quiz"
-          element={<QuizPage language={personalDetails.language} setResult={setResult}/>}
+          element={
+            <QuizPage
+              language={personalDetails.language}
+              setData={setData}
+              data={data}
+              navigate={navigate} 
+            />
+          }
         />
         <Route
           path="/result"
-          element={<Result navigate={navigate} result={result} />}
+          element={<Result data={data} />}
         />
       </Routes>
     </div>

@@ -8,21 +8,25 @@ type Props = {
   prevQue: any;
   nextQue: any;
   handleQueAttempt: any;
+  handleFinishTest: any;
 };
 
 const FillUp: React.FC<Props> = ({ ...props }) => {
   const { queObj } = props;
 
-  const [ansInput, setAnsInput] = useState("");
+  const [ansInput, setAnsInput] : any = useState("");
 
   const handleInputChange = (e: any) => {
-    setAnsInput(e.target.value);
+    setAnsInput(e.target.value.toLowerCase());
   };
 
   const handleSubmit = () => {
     props.handleQueAttempt(queObj.id, ansInput);
   };
 
+  const finishTest = () => {
+    props.handleFinishTest(queObj.id, ansInput);
+  };
 
   return (
     <div>
@@ -42,7 +46,12 @@ const FillUp: React.FC<Props> = ({ ...props }) => {
         >
           Prev
         </Button>
-        <Button variant="contained" onClick={handleSubmit}>
+        <Button
+          variant="contained"
+          onClick={
+            props.currPage < props.data.length - 1 ? handleSubmit : finishTest
+          }
+        >
           {props.currPage < props.data.length - 1 ? "Submit" : "Finish test"}
         </Button>
         <Button

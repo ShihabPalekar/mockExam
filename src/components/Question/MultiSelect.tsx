@@ -15,6 +15,7 @@ type Props = {
   prevQue: any;
   nextQue: any;
   handleQueAttempt: any;
+  handleFinishTest: any;
 };
 
 const MultiSelect: React.FC<Props> = ({ ...props }) => {
@@ -25,13 +26,15 @@ const MultiSelect: React.FC<Props> = ({ ...props }) => {
     const {
       target: { value },
     } = e;
-    setAnsInput(
-      typeof value === "string" ? value.split(",") : value
-    );
+    setAnsInput(typeof value === "string" ? value.split(",") : value);
   };
 
   const handleSubmit = () => {
     props.handleQueAttempt(queObj.id, ansInput);
+  };
+
+  const finishTest = () => {
+    props.handleFinishTest(queObj.id, ansInput);
   };
 
   return (
@@ -78,7 +81,12 @@ const MultiSelect: React.FC<Props> = ({ ...props }) => {
         >
           Prev
         </Button>
-        <Button variant="contained" onClick={handleSubmit}>
+        <Button
+          variant="contained"
+          onClick={
+            props.currPage < props.data.length - 1 ? handleSubmit : finishTest
+          }
+        >
           {props.currPage < props.data.length - 1 ? "Submit" : "Finish test"}
         </Button>
         <Button

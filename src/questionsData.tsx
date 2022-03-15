@@ -35,7 +35,7 @@ const questionsDataEnglish: any = [
     type: "multi-select",
     que: "Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem.",
     options: ["dummy1", "dummy2", "dummy3", "dummy4"],
-    answer: ["dummy2", "dummy4"]
+    answer: ["dummy2", "dummy4"],
   },
 ];
 

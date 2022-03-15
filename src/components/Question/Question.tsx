@@ -10,12 +10,12 @@ type Props = {
   currPage: number;
   data: any;
   handleQueAttempt: any;
+  handleFinishTest: any;
   prevQue: any;
   nextQue: any;
 };
 
 const Question: React.FC<Props> = ({ ...props }) => {
-  console.log(props.data, "quePage");
   switch (props.item.type) {
     case "mcq":
       return (
@@ -26,6 +26,7 @@ const Question: React.FC<Props> = ({ ...props }) => {
           prevQue={props.prevQue}
           nextQue={props.nextQue}
           handleQueAttempt={props.handleQueAttempt}
+          handleFinishTest={props.handleFinishTest}
         />
       );
     case "boolean":
@@ -37,6 +38,7 @@ const Question: React.FC<Props> = ({ ...props }) => {
           prevQue={props.prevQue}
           nextQue={props.nextQue}
           handleQueAttempt={props.handleQueAttempt}
+          handleFinishTest={props.handleFinishTest}
         />
       );
     case "fill-up":
@@ -48,6 +50,7 @@ const Question: React.FC<Props> = ({ ...props }) => {
           prevQue={props.prevQue}
           nextQue={props.nextQue}
           handleQueAttempt={props.handleQueAttempt}
+          handleFinishTest={props.handleFinishTest}
         />
       );
     case "multi-select":
@@ -59,6 +62,7 @@ const Question: React.FC<Props> = ({ ...props }) => {
           prevQue={props.prevQue}
           nextQue={props.nextQue}
           handleQueAttempt={props.handleQueAttempt}
+          handleFinishTest={props.handleFinishTest}
         />
       );
     case "match-up":
@@ -70,6 +74,7 @@ const Question: React.FC<Props> = ({ ...props }) => {
           prevQue={props.prevQue}
           nextQue={props.nextQue}
           handleQueAttempt={props.handleQueAttempt}
+          handleFinishTest={props.handleFinishTest}
         />
       );
     default: {

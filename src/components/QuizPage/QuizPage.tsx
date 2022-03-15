@@ -10,21 +10,22 @@ import Pagination from "../Pagination/Pagination";
 
 type Props = {
   language: string;
-  setResult: any;
+  data: any;
+  setData: any;
+  navigate: any;
 };
 
 const QuizPage: React.FC<Props> = ({ ...props }) => {
-  const [data, setData]: any = useState([]);
   const [currPage, setCurrPage] = useState(0);
 
   useEffect(() => {
     const { language } = props;
     if (language === "english") {
-      setData(questionsDataEnglish);
+      props.setData(questionsDataEnglish);
     } else if (language === "hindi") {
-      setData(questionsDataHindi);
+      props.setData(questionsDataHindi);
     } else if (language === "spanish") {
-      setData(questionsDataSpanish);
+      props.setData(questionsDataSpanish);
     }
   }, []);
 
@@ -37,28 +38,34 @@ const QuizPage: React.FC<Props> = ({ ...props }) => {
   };
 
   const handleQueAttempt = (qid: number, ans: any) => {
-    setData((prevState: any) =>
+    props.setData((prevState: any) =>
       prevState.map((i: any) => (i.id === qid ? { ...i, ansInput: ans } : i))
     );
-    // nextQue();
+    nextQue();
+  };
+
+  const handleFinishTest = (qid: number, ans: any) => {
+    handleQueAttempt(qid, ans);
+    props.navigate("/result");
   };
 
   return (
     <div>
-      {data[currPage] !== undefined && (
+      {props.data[currPage] !== undefined && (
         <div>
           <Pagination
-            data={data}
+            data={props.data}
             currPage={currPage}
             setCurrPage={setCurrPage}
           />
           <Question
-            item={data[currPage]}
+            item={props.data[currPage]}
             currPage={currPage}
-            data={data}
+            data={props.data}
             prevQue={prevQue}
             nextQue={nextQue}
             handleQueAttempt={handleQueAttempt}
+            handleFinishTest={handleFinishTest}
           />
         </div>
       )}
